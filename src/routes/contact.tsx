@@ -1,0 +1,162 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Linkedin, Mail, MapPin, Phone, Send, Twitter, Youtube } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+
+import { Reveal, SectionHeading } from "@/components/reveal";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+
+export const Route = createFileRoute("/contact")({
+  head: () => ({
+    meta: [
+      { title: "Contact Fikiri Communication — Request an Audit" },
+      {
+        name: "description",
+        content:
+          "Tell Fikiri Communication about your loyalty, CRM or data programme and request an audit.",
+      },
+      { property: "og:title", content: "Contact Fikiri Communication" },
+      { property: "og:description", content: "Request a loyalty, CRM or data audit." },
+    ],
+  }),
+  component: Contact,
+});
+
+const details = [
+  { icon: MapPin, label: "Office", value: "Limuru Road I&M Building, 1st Parklands Ave:, 1 Park Avenue, Kenya" },
+  { icon: Mail, label: "Email", value: "martinngoni94@gmail.com" },
+  { icon: Phone, label: "Phone", value: "+254 742178476" },
+];
+
+function Contact() {
+  const [sending, setSending] = useState(false);
+
+  return (
+    <div>
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="aurora" aria-hidden="true" />
+        <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Contact"
+              title="Prefer to send details first?"
+              description="Tell us a little about your programme and we’ll come back to you within two business days."
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.2fr_0.8fr]">
+        <Reveal>
+          <form
+            className="rounded-3xl border border-border bg-card p-8 shadow-soft sm:p-10"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const form = e.target as HTMLFormElement;
+              setSending(true);
+              setTimeout(() => {
+                setSending(false);
+                toast.success("Message sent", {
+                  description: "Thank you—we’ve received your enquiry and will be in touch within two business days.",
+                });
+                form.reset();
+              }, 900);
+            }}
+          >
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Field id="name" label="Full name" placeholder="Enter Name" />
+              <Field id="email" label="Email" type="email" placeholder="name@company.com" />
+              <Field id="phone" label="Phone" type="tel" placeholder="+254 700 000 000" required={false} />
+              <Field id="subject" label="Audit focus" placeholder="Loyalty, CRM or data audit" />
+            </div>
+            <div className="mt-5 space-y-2">
+              <Label htmlFor="message">Message</Label>
+              <Textarea
+                id="message"
+                required
+                rows={6}
+                placeholder="Tell us about your programme, customer data or the opportunity you want to explore."
+                className="resize-none"
+              />
+            </div>
+            <Button type="submit" variant="hero" size="lg" className="mt-7 w-full sm:w-auto" disabled={sending}>
+              {sending ? "Sending…" : (<>Request an Audit <Send /></>)}
+            </Button>
+          </form>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="space-y-5">
+            {details.map((d) => (
+              <div key={d.label} className="flex gap-4 rounded-2xl border border-border bg-card p-6 shadow-soft">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent text-accent-foreground">
+                  <d.icon className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                    {d.label}
+                  </p>
+                  <p className="mt-1.5 whitespace-pre-line text-sm leading-relaxed text-primary">
+                    {d.value}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            <div className="rounded-2xl border border-border bg-surface p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                Follow
+              </p>
+              <div className="mt-4 flex gap-2">
+                {[Linkedin, Twitter, Youtube].map((Icon, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    aria-label="Social profile"
+                    className="grid h-10 w-10 place-items-center rounded-xl border border-border bg-background text-muted-foreground transition-colors hover:border-emerald/50 hover:text-emerald"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="overflow-hidden rounded-2xl border border-border">
+              <div className="grid-lines grid h-48 place-items-center bg-surface">
+                <div className="text-center">
+                  <MapPin className="mx-auto h-6 w-6 text-emerald" />
+                  <p className="mt-2 text-sm font-medium text-primary">Nairobi</p>
+                  <p className="text-xs text-muted-foreground">Map placeholder</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+    </div>
+  );
+}
+
+function Field({
+  id,
+  label,
+  type = "text",
+  placeholder,
+  required = true,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+  placeholder: string;
+  required?: boolean;
+}) {
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={id}>{label}</Label>
+      <Input id={id} type={type} required={required} placeholder={placeholder} className="h-11" />
+    </div>
+  );
+}
