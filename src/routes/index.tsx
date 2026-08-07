@@ -76,6 +76,11 @@ function Index() {
               <Button asChild variant="outline" size="lg">
                 <Link to="/service">How we work</Link>
               </Button>
+              <Button asChild variant="outline" size="lg">
+    <Link to="/admin">
+      Admin Dashboard
+    </Link>
+  </Button>
             </div>
             <dl className="mt-12 grid max-w-lg grid-cols-2 gap-6 sm:grid-cols-4">
               {stats.map((s) => (
