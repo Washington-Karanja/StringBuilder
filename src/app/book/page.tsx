@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft, ArrowRight, CalendarDays, CheckCircle2, Clock, Mail } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -7,26 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { consultationTypes, timeSlots } from "@/data/content";
-
-export const Route = createFileRoute("/book")({
-  head: () => ({
-    meta: [
-      { title: "Book an Audit Consultation — Fikiri Communication" },
-      {
-        name: "description",
-        content:
-          "Book a 30-minute audit consultation with Fikiri Communication.",
-      },
-      { property: "og:title", content: "Book an Audit Consultation — Fikiri Communication" },
-      {
-        property: "og:description",
-        content: "A 30-minute conversation about your loyalty, CRM or data programme.",
-      },
-    ],
-  }),
-  component: Book,
-});
+import { consultationTypes, timeSlots } from "@/content/book";
 
 const steps = ["Consultation", "Date", "Time", "Details"];
 
@@ -40,7 +23,7 @@ function nextDays(count: number) {
   return out;
 }
 
-function Book() {
+export default function BookPage() {
   const [step, setStep] = useState(0);
   const [type, setType] = useState<string | null>(null);
   const [date, setDate] = useState<string | null>(null);
@@ -93,10 +76,10 @@ function Book() {
 
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <Button asChild variant="hero" size="lg">
-              <Link to="/blog">Read insights while you wait</Link>
+              <Link href="/articles">Read insights while you wait</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/">Back home</Link>
+              <Link href="/">Back home</Link>
             </Button>
           </div>
         </motion.section>

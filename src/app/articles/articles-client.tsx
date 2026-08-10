@@ -1,46 +1,21 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import { useMemo, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, Clock, Search } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
 
 import { PostCard } from "@/components/post-card";
 import { Reveal, SectionHeading } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Skeleton } from "@/components/ui/skeleton";
-import { categories, formatDate, posts } from "@/data/content";
+import { categories, formatDate, type Post } from "@/data/content";
 
-export const Route = createFileRoute("/blog/")({
-  head: () => ({
-    meta: [
-      { title: "Insights — Essays on Decisions, Strategy & Leadership" },
-      {
-        name: "description",
-        content:
-          "Long-form writing from Martin Ngoni on decision frameworks, strategy, career inflection points and executive advisory.",
-      },
-      { property: "og:title", content: "Insights by Martin Ngoni" },
-      {
-        property: "og:description",
-        content: "Essays on decision-making, strategy, careers and leadership.",
-      },
-    ],
-  }),
-  component: Blog,
-});
-
-function Blog() {
-  const [loading, setLoading] = useState(true);
+export function ArticlesClient({ initialArticles }: { initialArticles: Post[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
 
-  useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 650);
-    return () => clearTimeout(t);
-  }, []);
-
-  const published = useMemo(() => posts.filter((p) => p.status === "Published"), []);
-  const featured = published[0]!;
-
+  const published = useMemo(() => initialArticles.filter((p) => p.status === "Published"), [initialArticles]);
+  const featured = published[0];
   const filtered = useMemo(
     () =>
       published.slice(1).filter((p) => {
@@ -72,13 +47,12 @@ function Blog() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
-        {loading ? (
-          <FeaturedSkeleton />
+        {!featured ? (
+          <p className="py-20 text-center text-muted-foreground">No articles published yet.</p>
         ) : (
           <Reveal>
             <Link
-              to="/blog/$slug"
-              params={{ slug: featured.slug }}
+              href={`/articles/${featured.slug}`}
               className="group grid overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift lg:grid-cols-2"
             >
               <div className="aspect-16/10 overflow-hidden bg-secondary lg:aspect-auto">
@@ -113,7 +87,7 @@ function Blog() {
                     <p className="text-muted-foreground">{formatDate(featured.date)}</p>
                   </div>
                   <span className="ml-auto inline-flex items-center gap-1.5 text-sm font-semibold text-emerald">
-                    Read article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    Read article <ArrowRight className="h-4 w-4" />
                   </span>
                 </div>
               </div>
@@ -151,16 +125,14 @@ function Blog() {
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {loading
-            ? Array.from({ length: 3 }).map((_, i) => <CardSkeleton key={i} />)
-            : filtered.map((post, i) => (
-                <Reveal key={post.slug} delay={i * 0.06}>
-                  <PostCard post={post} />
-                </Reveal>
-              ))}
+          {filtered.map((post, i) => (
+            <Reveal key={post.slug} delay={i * 0.06}>
+              <PostCard post={post} />
+            </Reveal>
+          ))}
         </div>
 
-        {!loading && filtered.length === 0 ? (
+        {filtered.length === 0 ? (
           <div className="mt-10 rounded-2xl border border-dashed border-border py-16 text-center">
             <p className="text-sm font-medium text-primary">No articles match that search</p>
             <p className="mt-1.5 text-sm text-muted-foreground">
@@ -201,35 +173,6 @@ function Blog() {
           </form>
         </div>
       </section>
-    </div>
-  );
-}
-
-function FeaturedSkeleton() {
-  return (
-    <div className="grid overflow-hidden rounded-3xl border border-border lg:grid-cols-2">
-      <Skeleton className="aspect-16/10 rounded-none" />
-      <div className="space-y-4 p-8 sm:p-12">
-        <Skeleton className="h-5 w-28" />
-        <Skeleton className="h-8 w-full" />
-        <Skeleton className="h-8 w-3/4" />
-        <Skeleton className="h-16 w-full" />
-        <Skeleton className="h-9 w-40" />
-      </div>
-    </div>
-  );
-}
-
-function CardSkeleton() {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-border">
-      <Skeleton className="aspect-16/10 rounded-none" />
-      <div className="space-y-3 p-6">
-        <Skeleton className="h-4 w-24" />
-        <Skeleton className="h-6 w-full" />
-        <Skeleton className="h-6 w-2/3" />
-        <Skeleton className="h-12 w-full" />
-      </div>
     </div>
   );
 }

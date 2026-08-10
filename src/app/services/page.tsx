@@ -1,41 +1,18 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  Briefcase,
-  CheckCircle2,
-  Clock,
-  Compass,
-  MessageSquare,
-  ShieldCheck,
-  TrendingUp,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, Clock } from "lucide-react";
 
 import { Reveal, SectionHeading } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
-import { services } from "@/data/content";
+import { services, serviceIcons as allServiceIcons } from "@/content/services";
 
-const icons = { Briefcase, Compass, TrendingUp, ShieldCheck, MessageSquare };
+const icons = allServiceIcons;
 
-export const Route = createFileRoute("/service")({
-  head: () => ({
-    meta: [
-      { title: "Services — Loyalty, Engagement & Data Strategy" },
-      {
-        name: "description",
-        content:
-          "Loyalty strategy, CRM and engagement, and customer data and analytics from Fikiri Communication.",
-      },
-      { property: "og:title", content: "Services — Fikiri Communication" },
-      {
-        property: "og:description",
-        content: "Three connected disciplines for measurable loyalty, CRM and customer data results.",
-      },
-    ],
-  }),
-  component: Services,
-});
+export const metadata = {
+  title: "Services — Loyalty, Engagement & Data Strategy",
+  description: "Loyalty strategy, CRM and engagement, and customer data and analytics from Fikiri Communication.",
+};
 
-function Services() {
+export default function ServicesPage() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-border">
@@ -87,7 +64,7 @@ function Services() {
                       </p>
                     </div>
                     <Button asChild variant="outline" className="shrink-0">
-                      <Link to="/book">
+                      <Link href="/book">
                         Request an Audit <ArrowRight />
                       </Link>
                     </Button>

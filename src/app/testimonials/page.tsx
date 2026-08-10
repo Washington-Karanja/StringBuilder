@@ -1,32 +1,15 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { useState } from "react";
 
 import { Reveal, SectionHeading } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
-import { testimonials } from "@/data/content";
+import { testimonials } from "@/content/testimonials";
 
-export const Route = createFileRoute("/testimonials")({
-  head: () => ({
-    meta: [
-      { title: "Testimonials — What Clients Say About Martin Ngoni" },
-      {
-        name: "description",
-        content:
-          "Feedback from founders, executives and senior professionals who have worked with consultant Martin Ngoni.",
-      },
-      { property: "og:title", content: "Client Testimonials — Martin Ngoni" },
-      {
-        property: "og:description",
-        content: "Feedback from founders, executives and senior professionals.",
-      },
-    ],
-  }),
-  component: Testimonials,
-});
-
-function Testimonials() {
+export default function TestimonialsPage() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const active = testimonials[index]!;
@@ -140,7 +123,7 @@ function Testimonials() {
 
         <div className="mt-14 text-center">
           <Button asChild variant="hero" size="lg">
-            <Link to="/book">Book a Consultation</Link>
+            <Link href="/book">Book a Consultation</Link>
           </Button>
         </div>
       </section>

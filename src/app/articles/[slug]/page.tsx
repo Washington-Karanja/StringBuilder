@@ -1,49 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { ArrowLeft, Clock } from "lucide-react";
 
 import { formatDate, posts } from "@/data/content";
 
-export const Route = createFileRoute("/blog/$slug")({
-  head: ({ params }) => {
-    const post = posts.find((p) => p.slug === params.slug);
+export const metadata = {
+  title: "Insights — Martin Ngoni",
+  description: "Essays on strategy, leadership and decision making.",
+};
 
-    return {
-      meta: [
-        {
-          title: post
-            ? `${post.title} — Martin Ngoni`
-            : "Article — Martin Ngoni",
-        },
-        {
-          name: "description",
-          content:
-            post?.excerpt ??
-            "Insights on strategy, leadership and decision making.",
-        },
-        {
-          property: "og:title",
-          content: post?.title ?? "Martin Ngoni Insights",
-        },
-        {
-          property: "og:description",
-          content:
-            post?.excerpt ??
-            "Insights on strategy, leadership and decision making.",
-        },
-      ],
-    };
-  },
-
-  component: BlogPost,
-});
-
-
-function BlogPost() {
-  const { slug } = Route.useParams();
-
-  const post = posts.find(
-    (item) => item.slug === slug
-  );
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = posts.find((item) => item.slug === slug);
 
   if (!post) {
     return (
@@ -57,7 +24,7 @@ function BlogPost() {
         </p>
 
         <Link
-          to="/blog"
+          href="/articles"
           className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -73,7 +40,7 @@ function BlogPost() {
 
       {/* Back button */}
       <Link
-        to="/blog"
+        href="/articles"
         className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
       >
         <ArrowLeft className="h-4 w-4" />

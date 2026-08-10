@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Linkedin, Mail, MapPin, Phone, Send, Twitter, Youtube } from "lucide-react";
+"use client";
+
+import { Linkedin, MapPin, Send, Twitter, Youtube } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -8,30 +9,30 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { details } from "@/content/contact";
 
-export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact Fikiri Communication — Request an Audit" },
-      {
-        name: "description",
-        content:
-          "Tell Fikiri Communication about your loyalty, CRM or data programme and request an audit.",
-      },
-      { property: "og:title", content: "Contact Fikiri Communication" },
-      { property: "og:description", content: "Request a loyalty, CRM or data audit." },
-    ],
-  }),
-  component: Contact,
-});
+function Field({
+  id,
+  label,
+  type = "text",
+  placeholder,
+  required = true,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+  placeholder: string;
+  required?: boolean;
+}) {
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={id}>{label}</Label>
+      <Input id={id} type={type} required={required} placeholder={placeholder} className="h-11" />
+    </div>
+  );
+}
 
-const details = [
-  { icon: MapPin, label: "Office", value: "Limuru Road I&M Building, 1st Parklands Ave:, 1 Park Avenue, Kenya" },
-  { icon: Mail, label: "Email", value: "martinngoni94@gmail.com" },
-  { icon: Phone, label: "Phone", value: "+254 742178476" },
-];
-
-function Contact() {
+export default function ContactPage() {
   const [sending, setSending] = useState(false);
 
   return (
@@ -43,7 +44,7 @@ function Contact() {
             <SectionHeading
               eyebrow="Contact"
               title="Prefer to send details first?"
-              description="Tell us a little about your programme and we’ll come back to you within two business days."
+              description="Tell us a little about your programme and we'll come back to you within two business days."
             />
           </Reveal>
         </div>
@@ -60,7 +61,7 @@ function Contact() {
               setTimeout(() => {
                 setSending(false);
                 toast.success("Message sent", {
-                  description: "Thank you—we’ve received your enquiry and will be in touch within two business days.",
+                  description: "Thank you—we've received your enquiry and will be in touch within two business days.",
                 });
                 form.reset();
               }, 900);
@@ -136,27 +137,6 @@ function Contact() {
           </div>
         </Reveal>
       </section>
-    </div>
-  );
-}
-
-function Field({
-  id,
-  label,
-  type = "text",
-  placeholder,
-  required = true,
-}: {
-  id: string;
-  label: string;
-  type?: string;
-  placeholder: string;
-  required?: boolean;
-}) {
-  return (
-    <div className="space-y-2">
-      <Label htmlFor={id}>{label}</Label>
-      <Input id={id} type={type} required={required} placeholder={placeholder} className="h-11" />
     </div>
   );
 }

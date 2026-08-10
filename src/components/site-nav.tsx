@@ -1,4 +1,7 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -7,14 +10,15 @@ import { Button } from "@/components/ui/button";
 const links = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
-  { to: "/blog", label: "Blog" },
-  { to: "/service", label: "Services" },
+  { to: "/articles", label: "Blog" },
+  { to: "/services", label: "Services" },
   { to: "/testimonials", label: "Testimonials" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -23,10 +27,15 @@ export function SiteNav() {
     };
   }, [open]);
 
+  const isActive = (path: string) => {
+    if (path === "/") return pathname === "/";
+    return pathname.startsWith(path);
+  };
+
   return (
     <header className="glass-nav sticky top-0 z-50">
       <nav className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-5 sm:px-8">
-        <Link to="/" className="flex min-w-0 items-center gap-2.5" onClick={() => setOpen(false)}>
+        <Link href="/" className="flex min-w-0 items-center gap-2.5" onClick={() => setOpen(false)}>
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-sm font-bold text-primary-foreground">
             Fikiri
           </span>
@@ -39,9 +48,8 @@ export function SiteNav() {
           {links.map((link) => (
             <Link
               key={link.to}
-              to={link.to}
-              activeOptions={{ exact: link.to === "/" }}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-primary data-[status=active]:text-primary"
+              href={link.to}
+              className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary hover:text-primary ${isActive(link.to) ? "text-primary" : "text-muted-foreground"}`}
             >
               {link.label}
             </Link>
@@ -50,7 +58,9 @@ export function SiteNav() {
 
         <div className="ml-auto flex items-center gap-2 lg:ml-3">
           <Button asChild variant="hero" size="sm" className="hidden sm:inline-flex">
-            <Link to="/book">Request an Audit</Link>
+            <Link href="/book" onClick={() => setOpen(false)}>
+              Request an Audit
+            </Link>
           </Button>
           <button
             type="button"
@@ -63,27 +73,27 @@ export function SiteNav() {
         </div>
       </nav>
 
-      {open ? (
+      {open && (
         <div className="border-t border-border bg-background px-5 pb-6 pt-3 lg:hidden">
           <div className="flex flex-col">
             {links.map((link) => (
               <Link
                 key={link.to}
-                to={link.to}
+                href={link.to}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-primary data-[status=active]:text-primary"
+                className={`rounded-lg px-3 py-3 text-sm font-medium transition-colors hover:bg-secondary hover:text-primary ${isActive(link.to) ? "text-primary" : "text-muted-foreground"}`}
               >
                 {link.label}
               </Link>
             ))}
             <Button asChild variant="hero" className="mt-3">
-              <Link to="/book" onClick={() => setOpen(false)}>
+              <Link href="/book" onClick={() => setOpen(false)}>
                 Request an Audit
               </Link>
             </Button>
           </div>
         </div>
-      ) : null}
+      )}
     </header>
   );
 }

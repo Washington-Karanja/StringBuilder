@@ -1,10 +1,13 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { Linkedin, Mail, Twitter, Youtube } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { posts, services } from "@/data/content";
+import { posts } from "@/data/content";
+import { services } from "@/content/services";
 
 export function SiteFooter() {
   return (
@@ -44,12 +47,12 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
               {[
                 { to: "/about", label: "About" },
-                { to: "/blog", label: "Blog" },
+                { to: "/articles", label: "Blog" },
                 { to: "/testimonials", label: "Testimonials" },
                 { to: "/contact", label: "Contact" },
               ].map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="transition-colors hover:text-emerald">
+                   <Link href={l.to} className="transition-colors hover:text-emerald">
                     {l.label}
                   </Link>
                 </li>
@@ -64,7 +67,7 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link to="/service" className="transition-colors hover:text-emerald">
+                  <Link href="/services" className="transition-colors hover:text-emerald">
                     {s.title}
                   </Link>
                 </li>
@@ -80,8 +83,7 @@ export function SiteFooter() {
               {posts.slice(0, 2).map((p) => (
                 <li key={p.slug}>
                   <Link
-                    to="/blog/$slug"
-                    params={{ slug: p.slug }}
+                    href={`/articles/${p.slug}`}
                     className="line-clamp-2 transition-colors hover:text-emerald"
                   >
                     {p.title}

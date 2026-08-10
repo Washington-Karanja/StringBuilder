@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { ArrowUpRight, Clock } from "lucide-react";
 
 import { formatDate, type Post } from "@/data/content";
@@ -6,10 +6,7 @@ import { formatDate, type Post } from "@/data/content";
 export function PostCard({ post }: { post: Post }) {
   return (
     <Link
-      to="/blog/$slug"
-      params={{
-        slug: post.slug,
-      }}
+      href={`/articles/${post.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
     >
       <div className="aspect-16/10 overflow-hidden bg-secondary">

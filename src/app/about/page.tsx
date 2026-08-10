@@ -1,62 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Award, CheckCircle2, Globe2, Linkedin, Target, Users } from "lucide-react";
+import { Award, CheckCircle2, Globe2, Linkedin, Target } from "lucide-react";
 
-import aboutPhoto from "@/assets/about-photo.jpg";
-import martinPortrait from "@/assets/martin-portrait.jpg";
+import Link from "next/link";
 import { Reveal, SectionHeading } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
-import { stats } from "@/data/content";
+import { stats } from "@/content/home";
+import { disciplines, industries, team, clientBrands } from "@/content/about";
 
-export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Fikiri Communication" },
-      { name: "description", content: "Fikiri Communication is a specialist consulting practice for loyalty, CRM and data analytics." },
-      { property: "og:title", content: "About Fikiri Communication" },
-      { property: "og:description", content: "Objective loyalty, CRM and data advice built on hands-on programme experience." },
-    ],
-  }),
-  component: About,
-});
+export const metadata = {
+  title: "About Fikiri Communication",
+  description: "Fikiri Communication is a specialist consulting practice for loyalty, CRM and data analytics.",
+};
 
-const disciplines = ["Loyalty strategy", "CRM & engagement", "Customer data & analytics"];
-
-const industries = [
-  "Retail & Shopping Centres",
-  "Hospitality & Travel",
-  "Banking & Financial Services",
-  "Telecommunications",
-  "E-commerce & Consumer Brands",
-  "Healthcare & Pharmacy",
-];
-
-const team = [
-  {
-    name: "Martin Ngoni",
-    role: "Founder",
-    image: martinPortrait,
-    alt: "Martin Ngoni",
-    bio: "Martin has spent his career building and running loyalty programmes for industry-leading brands, including Village Market and Circle Rewards—helping them turn everyday customers into lasting, loyal ones. He founded Fikiri Communication on the conviction that loyalty is engineered, not hoped for.",
-    credentials: ["Loyalty programme strategy", "CRM & customer data"],
-    linkedIn: "#",
-  },
-  {
-    name: "Team member name",
-    role: "Role to be confirmed",
-    image: aboutPhoto,
-    alt: "Placeholder for a future Fikiri Communication team member",
-    bio: "A second team profile will be added here with their background, specialist experience and the perspective they bring to the practice.",
-    credentials: ["Professional photo pending", "LinkedIn profile pending"],
-    linkedIn: "#",
-  },
-];
-
-const clientBrands = [
-  { name: "Village Market", mark: "VM" },
-  { name: "Circle Rewards", mark: "CR" },
-];
-
-function About() {
+export default function AboutPage() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-border">
@@ -76,7 +31,7 @@ function About() {
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
             <div className="overflow-hidden rounded-3xl border border-border shadow-lift">
-              <img src={aboutPhoto} alt="Fikiri Communication at work" loading="lazy" width={1200} height={1008} className="h-full w-full object-cover" />
+              <img src="/images/about-photo.jpg" alt="Fikiri Communication at work" loading="lazy" width={1200} height={1008} className="h-full w-full object-cover" />
             </div>
           </Reveal>
 
@@ -96,8 +51,8 @@ function About() {
               </div>
 
               <div className="flex flex-wrap gap-3 pt-2">
-                <Button asChild variant="hero"><Link to="/book">Request an Audit</Link></Button>
-                <Button asChild variant="outline"><Link to="/service">Explore services</Link></Button>
+                <Button asChild variant="hero"><Link href="/book">Request an Audit</Link></Button>
+                <Button asChild variant="outline"><Link href="/services">Explore services</Link></Button>
               </div>
             </div>
           </Reveal>

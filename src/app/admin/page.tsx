@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import {
   BarChart3,
   CalendarCheck,
@@ -23,23 +25,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { formatDate, posts as seedPosts, services, testimonials } from "@/data/content";
-
-export const Route = createFileRoute("/admin")({
-  head: () => ({
-    meta: [
-      { title: "Admin Dashboard — Martin Ngoni" },
-      {
-        name: "description",
-        content: "Manage articles, consultation requests, testimonials and site content.",
-      },
-      { name: "robots", content: "noindex" },
-      { property: "og:title", content: "Admin Dashboard — Martin Ngoni" },
-      { property: "og:description", content: "Internal content management dashboard." },
-    ],
-  }),
-  component: Admin,
-});
+import { formatDate, posts as seedPosts } from "@/data/content";
+import { services } from "@/content/services";
+import { testimonials } from "@/content/testimonials";
 
 const bookings = [
   { name: "Elena Petrov", type: "Strategy Session", when: "Mon 12 Aug · 10:00", status: "Pending" },
@@ -55,7 +43,7 @@ const metrics = [
   { label: "Published articles", value: "12", delta: "3 drafts", icon: FileText },
 ];
 
-function Admin() {
+export default function AdminPage() {
   const [items, setItems] = useState(seedPosts);
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
@@ -116,7 +104,7 @@ function Admin() {
           </nav>
           <div className="mt-auto space-y-1 text-sm">
             <Link
-              to="/"
+              href="/"
               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sidebar-foreground/70 transition-colors hover:text-sidebar-foreground"
             >
               <Home className="h-4 w-4" /> View site
@@ -136,7 +124,7 @@ function Admin() {
               </p>
             </div>
             <Button asChild variant="outline" className="shrink-0 lg:hidden">
-              <Link to="/">View site</Link>
+              <Link href="/">View site</Link>
             </Button>
           </header>
 
