@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft, Clock } from "lucide-react";
 
-import { formatDate, posts } from "@/data/content";
+import { getArticleBySlug } from "@/lib/articles";
+import { formatDate } from "@/data/content";
 
 export const metadata = {
   title: "Insights — Martin Ngoni",
@@ -10,25 +11,15 @@ export const metadata = {
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = posts.find((item) => item.slug === slug);
+  const post = await getArticleBySlug(slug);
 
   if (!post) {
     return (
       <section className="mx-auto max-w-4xl px-5 py-20 sm:px-8">
-        <h1 className="text-3xl font-bold text-primary">
-          Article not found
-        </h1>
-
-        <p className="mt-3 text-muted-foreground">
-          The article you are looking for does not exist.
-        </p>
-
-        <Link
-          href="/articles"
-          className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to articles
+        <h1 className="text-3xl font-bold text-primary">Article not found</h1>
+        <p className="mt-3 text-muted-foreground">The article you are looking for does not exist.</p>
+        <Link href="/articles" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald">
+          <ArrowLeft className="h-4 w-4" /> Back to articles
         </Link>
       </section>
     );

@@ -1,12 +1,45 @@
-export const disciplines = ["Loyalty strategy", "CRM & engagement", "Customer data & analytics"];
+export const disciplines = ["Loyalty", "Engagement", "Data Analytics"];
 
-export const industries = [
-  "Retail & Shopping Centres",
-  "Hospitality & Travel",
-  "Banking & Financial Services",
-  "Telecommunications",
-  "E-commerce & Consumer Brands",
-  "Healthcare & Pharmacy",
+export type Industry = {
+  name: string;
+  description: string;
+  benchmarks?: string[];
+};
+
+export const industries: Industry[] = [
+  {
+    name: "Retail & Shopping Centres",
+    description:
+      "From single-brand retail to multi-tenant malls and coalition models, we design loyalty that drives footfall, basket size and repeat visits — and gives tenants a reason to take part.",
+    benchmarks: ["Tesco Clubcard", "Carrefour"],
+  },
+  {
+    name: "Hospitality & Travel",
+    description:
+      "Hotel programmes, airline and frequent-flyer schemes, and tourism partnerships built around status, experiential rewards and genuine emotional loyalty.",
+    benchmarks: ["Marriott Bonvoy", "Flying Blue", "Emirates Skywards"],
+  },
+  {
+    name: "Banking & Financial Services",
+    description:
+      "Card-linked rewards, cashback, co-branded partnerships and tiered structures that deepen relationships and reward the behaviour that matters to the business.",
+  },
+  {
+    name: "Telecommunications",
+    description:
+      "Subscriber rewards, usage-based incentives and data-driven personalisation that reduce churn in one of the most competitive retention environments there is.",
+  },
+  {
+    name: "E-commerce & Consumer Brands",
+    description:
+      "Subscription loyalty, referral programmes, membership clubs and gamification that turn one-time buyers into repeat customers and advocates.",
+    benchmarks: ["Amazon Prime", "Sephora Beauty Insider"],
+  },
+  {
+    name: "Healthcare & Pharmacy",
+    description:
+      "Trust and repeat relationships matter deeply in healthcare and pharmacy. Loyalty strategies in this sector should strengthen meaningful customer relationships while using data, engagement and relevant rewards responsibly.",
+  },
 ];
 
 export type TeamMember = {
@@ -25,15 +58,15 @@ export const team: TeamMember[] = [
     role: "Founder",
     image: "/images/martin-portrait.jpg",
     alt: "Martin Ngoni",
-    bio: "Martin has spent his career building and running loyalty programmes for industry-leading brands, including Village Market and Circle Rewards—helping them turn everyday customers into lasting, loyal ones. He founded Fikiri Communication on the conviction that loyalty is engineered, not hoped for.",
+    bio: "Martin has spent his career building and running loyalty programmes for industry-leading brands, including Village Market and Circle Rewards — helping them turn everyday customers into lasting, loyal ones. He founded Fikiri Communication on a simple conviction: that loyalty is engineered, not hoped for, and that the brands who get it right treat their customers' data, their marketing and their rewards as one connected discipline. His focus is helping businesses build programmes that are simple, personalised and valuable — and that deliver measurable commercial results.",
     credentials: ["Loyalty programme strategy", "CRM & customer data"],
     linkedIn: "#",
   },
   {
     name: "Team member name",
     role: "Role to be confirmed",
-    image: "/images/about-photo.jpg",
-    alt: "Placeholder for a future Fikiri Communication team member",
+    image: "/images/avatar-placeholder.svg",
+    alt: "Placeholder avatar for a future Fikiri Communication team member",
     bio: "A second team profile will be added here with their background, specialist experience and the perspective they bring to the practice.",
     credentials: ["Professional photo pending", "LinkedIn profile pending"],
     linkedIn: "#",
@@ -43,4 +76,29 @@ export const team: TeamMember[] = [
 export const clientBrands = [
   { name: "Village Market", mark: "VM" },
   { name: "Circle Rewards", mark: "CR" },
+];
+
+export const beliefs = [
+  "Loyalty must balance customer value and profitability.",
+  "Data comes first.",
+  "Impact should be quantified.",
+  "Strategy and execution are different disciplines.",
+];
+
+export const principles = [
+  {
+    title: "Simple",
+    description:
+      "Can a customer understand it in a sentence, and use it without thinking twice?",
+  },
+  {
+    title: "Personalised",
+    description:
+      "Does it recognise who each customer is, and respond to what they actually do?",
+  },
+  {
+    title: "Valuable",
+    description:
+      "Does it give customers something they genuinely want, at a cost the business can sustain?",
+  },
 ];

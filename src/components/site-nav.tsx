@@ -35,13 +35,8 @@ export function SiteNav() {
   return (
     <header className="glass-nav sticky top-0 z-50">
       <nav className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-5 sm:px-8">
-        <Link href="/" className="flex min-w-0 items-center gap-2.5" onClick={() => setOpen(false)}>
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-sm font-bold text-primary-foreground">
-            Fikiri
-          </span>
-          <span className="truncate font-display text-[0.95rem] font-semibold tracking-tight text-primary">
-            Communications
-          </span>
+        <Link href="/" className="flex min-w-0 items-center mr-3" onClick={() => setOpen(false)}>
+          <img src="/images/Fikiri-logo.png" alt="Fikiri Communication" className="h-32 w-auto shrink-0" />
         </Link>
 
         <div className="ml-auto hidden items-center gap-1 lg:flex">

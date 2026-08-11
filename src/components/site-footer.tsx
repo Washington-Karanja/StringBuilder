@@ -15,13 +15,8 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.4fr]">
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-sm font-bold text-primary-foreground">
-                FC
-              </span>
-              <span className="font-display text-[0.95rem] font-semibold text-primary">
-                Fikiri Communication
-              </span>
+            <div className="flex items-center">
+              <img src="/images/Fikiri-logo.png" alt="Fikiri Communication" className="h-9 w-auto shrink-0" />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Loyalty, CRM and data strategy for businesses that want measurable results.

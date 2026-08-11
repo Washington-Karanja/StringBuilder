@@ -28,6 +28,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatDate, posts as seedPosts } from "@/data/content";
 import { services } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
+import { createArticle, deleteArticle } from "@/lib/articles-actions";
 
 const bookings = [
   { name: "Elena Petrov", type: "Strategy Session", when: "Mon 12 Aug · 10:00", status: "Pending" },
@@ -48,22 +49,29 @@ export default function AdminPage() {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
 
-  const publish = (status: "Published" | "Draft") => {
+  const publish = async (status: "Published" | "Draft") => {
     if (!title.trim()) {
       toast.error("Give the article a title first");
       return;
     }
-    setItems((prev) => [
-      {
-        ...prev[0]!,
-        slug: `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 40)}-${prev.length}`,
-        title,
-        excerpt: excerpt || "No excerpt yet.",
-        status,
-        date: new Date().toISOString().slice(0, 10),
-      },
-      ...prev,
-    ]);
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("excerpt", excerpt);
+    formData.append("content", "");
+    formData.append("category", "Loyalty");
+    formData.append("status", status);
+
+    const result = await createArticle(formData);
+
+    if (result.error) {
+      toast.error(result.error);
+      return;
+    }
+
+    if (result.data) {
+      setItems((prev) => [result.data, ...prev]);
+    }
     setTitle("");
     setExcerpt("");
     toast.success(status === "Published" ? "Article published" : "Draft saved");
@@ -182,7 +190,10 @@ export default function AdminPage() {
                           variant="ghost"
                           size="icon"
                           aria-label="Delete"
-                          onClick={() => {
+                          onClick={async () => {
+                            if (p.id) {
+                              await deleteArticle(p.id);
+                            }
                             setItems((prev) => prev.filter((x) => x.slug !== p.slug));
                             toast.success("Article deleted");
                           }}
