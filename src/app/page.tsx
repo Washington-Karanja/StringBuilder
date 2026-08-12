@@ -131,7 +131,10 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-        <div className="grid gap-6 md:grid-cols-3">
+        <Reveal>
+          <SectionHeading eyebrow="Testimonials" title="What clients say about working with us" description="Feedback from leaders who have partnered with Fikiri Communication on loyalty, CRM and customer data." />
+        </Reveal>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
           {testimonials.slice(0, 3).map((t, i) => (
             <Reveal key={t.name} delay={i * 0.07}>
               <figure className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 shadow-soft">
