@@ -83,16 +83,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
 
       {/* Article content */}
-      <div className="prose prose-lg mt-12 max-w-none">
-
-        {post.content ? (
-          post.content
-        ) : (
-          <p>
-            Article content coming soon.
-          </p>
-        )}
-
+      <div className="mt-12 space-y-6 text-base leading-relaxed text-foreground sm:text-lg">
+        {post.body.map((paragraph, i) => (
+          <p key={i}>{paragraph}</p>
+        ))}
       </div>
 
 

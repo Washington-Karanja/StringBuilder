@@ -16,7 +16,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.4fr]">
           <div>
             <div className="flex items-center">
-              <img src="/images/Fikiri-logo.png" alt="Fikiri Communication" className="h-9 w-auto shrink-0" />
+              <img src="/images/Fikiri-logo.png" alt="Fikiri Communication" className="h-32 w-auto shrink-0" />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Loyalty, CRM and data strategy for businesses that want measurable results.
