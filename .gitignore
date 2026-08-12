@@ -2,5 +2,35 @@ node_modules
 .next
 dist
 .tanstack
-*.local
-.env*.local
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Lock files that should not be committed
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage
+
+# Build artifacts
+out
+build

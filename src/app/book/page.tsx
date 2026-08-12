@@ -266,20 +266,25 @@ export default function BookPage() {
                 disabled={!canContinue || submitting}
                 onClick={async () => {
                   setSubmitting(true);
-                  const formData = new FormData();
-                  formData.append("name", name);
-                  formData.append("email", email);
-                  formData.append("phone", phone);
-                  formData.append("notes", notes);
-                  formData.append("consultationType", selectedType?.name || type || "");
-                  formData.append("date", date || "");
-                  formData.append("time", time || "");
-                  const result = await submitBooking(formData);
-                  setSubmitting(false);
-                  if (result.success) {
-                    setConfirmed(true);
-                  } else {
-                    toast.error(result.error || "Something went wrong. Please try again.");
+                  try {
+                    const formData = new FormData();
+                    formData.append("name", name);
+                    formData.append("email", email);
+                    formData.append("phone", phone);
+                    formData.append("notes", notes);
+                    formData.append("consultationType", selectedType?.name || type || "");
+                    formData.append("date", date || "");
+                    formData.append("time", time || "");
+                    const result = await submitBooking(formData);
+                    if (result.success) {
+                      setConfirmed(true);
+                    } else {
+                      toast.error(result.error || "Something went wrong. Please try again.");
+                    }
+                  } catch (err) {
+                    toast.error(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+                  } finally {
+                    setSubmitting(false);
                   }
                 }}
               >

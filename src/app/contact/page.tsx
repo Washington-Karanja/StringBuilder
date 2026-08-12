@@ -14,12 +14,14 @@ import { submitContact } from "@/lib/bookings-actions";
 
 function Field({
   id,
+  name,
   label,
   type = "text",
   placeholder,
   required = true,
 }: {
   id: string;
+  name: string;
   label: string;
   type?: string;
   placeholder: string;
@@ -28,7 +30,7 @@ function Field({
   return (
     <div className="space-y-2">
       <Label htmlFor={id}>{label}</Label>
-      <Input id={id} type={type} required={required} placeholder={placeholder} className="h-11" />
+      <Input id={id} name={name} type={type} required={required} placeholder={placeholder} className="h-11" />
     </div>
   );
 }
@@ -59,28 +61,34 @@ export default function ContactPage() {
             className="rounded-3xl border border-border bg-card p-8 shadow-soft sm:p-10"
             action={async (formData) => {
               setSending(true);
-              const result = await submitContact(formData);
-              setSending(false);
-              if (result.success) {
-                toast.success("Message sent", {
-                  description: "Thank you—we've received your enquiry and will be in touch within two business days.",
-                });
-                formRef.current?.reset();
-              } else {
-                toast.error(result.error || "Something went wrong. Please try again.");
+              try {
+                const result = await submitContact(formData);
+                if (result.success) {
+                  toast.success("Message sent", {
+                    description: "Thank you—we've received your enquiry and will be in touch within two business days.",
+                  });
+                  formRef.current?.reset();
+                } else {
+                  toast.error(result.error || "Something went wrong. Please try again.");
+                }
+              } catch (err) {
+                toast.error(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+              } finally {
+                setSending(false);
               }
             }}
           >
             <div className="grid gap-5 sm:grid-cols-2">
-              <Field id="name" label="Full name" placeholder="Enter Name" />
-              <Field id="email" label="Email" type="email" placeholder="name@company.com" />
-              <Field id="phone" label="Phone" type="tel" placeholder="+254 700 000 000" required={false} />
-              <Field id="subject" label="Audit focus" placeholder="Loyalty, CRM or data audit" />
+              <Field id="name" name="name" label="Full name" placeholder="Enter Name" />
+              <Field id="email" name="email" label="Email" type="email" placeholder="name@company.com" />
+              <Field id="phone" name="phone" label="Phone" type="tel" placeholder="+254 700 000 000" required={false} />
+              <Field id="subject" name="subject" label="Audit focus" placeholder="Loyalty, CRM or data audit" />
             </div>
             <div className="mt-5 space-y-2">
               <Label htmlFor="message">Message</Label>
               <Textarea
                 id="message"
+                name="message"
                 required
                 rows={6}
                 placeholder="Tell us about your programme, customer data or the opportunity you want to explore."

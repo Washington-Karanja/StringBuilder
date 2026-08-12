@@ -3,13 +3,12 @@ import { CheckCircle2 } from "lucide-react";
 
 import { Reveal, SectionHeading } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
+import { method, platforms, beliefs } from "@/content/approach";
 
 export const metadata = {
   title: "How We Work — Fikiri Communication",
   description: "Independent loyalty, CRM and data consulting, plus platform-agnostic technology advice.",
 };
-
-import { method, platforms, beliefs } from "@/content/approach";
 
 export default function ApproachPage() {
   return <div>
