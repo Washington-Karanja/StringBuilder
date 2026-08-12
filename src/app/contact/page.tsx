@@ -1,7 +1,7 @@
 "use client";
 
 import { Linkedin, MapPin, Send, Twitter, Youtube } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { toast } from "sonner";
 
 import { Reveal, SectionHeading } from "@/components/reveal";
@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { details } from "@/content/contact";
+import { submitContact } from "@/lib/bookings-actions";
 
 function Field({
   id,
@@ -34,6 +35,7 @@ function Field({
 
 export default function ContactPage() {
   const [sending, setSending] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   return (
     <div>
@@ -53,18 +55,20 @@ export default function ContactPage() {
       <section className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.2fr_0.8fr]">
         <Reveal>
           <form
+            ref={formRef}
             className="rounded-3xl border border-border bg-card p-8 shadow-soft sm:p-10"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const form = e.target as HTMLFormElement;
+            action={async (formData) => {
               setSending(true);
-              setTimeout(() => {
-                setSending(false);
+              const result = await submitContact(formData);
+              setSending(false);
+              if (result.success) {
                 toast.success("Message sent", {
                   description: "Thank you—we've received your enquiry and will be in touch within two business days.",
                 });
-                form.reset();
-              }, 900);
+                formRef.current?.reset();
+              } else {
+                toast.error(result.error || "Something went wrong. Please try again.");
+              }
             }}
           >
             <div className="grid gap-5 sm:grid-cols-2">

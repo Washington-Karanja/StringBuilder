@@ -17,7 +17,7 @@ import {
   Trash2,
   Users,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -29,13 +29,7 @@ import { formatDate, posts as seedPosts } from "@/data/content";
 import { services } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
 import { createArticle, deleteArticle } from "@/lib/articles-actions";
-
-const bookings = [
-  { name: "Elena Petrov", type: "Strategy Session", when: "Mon 12 Aug · 10:00", status: "Pending" },
-  { name: "Marcus Hale", type: "Personal Consultation", when: "Tue 13 Aug · 14:00", status: "Confirmed" },
-  { name: "Nia Adeyemi", type: "Discovery Call", when: "Wed 14 Aug · 09:00", status: "Confirmed" },
-  { name: "Tom Bradshaw", type: "Executive Advisory", when: "Fri 16 Aug · 16:30", status: "Pending" },
-];
+import { getBookings, updateBookingStatus } from "@/lib/bookings-actions";
 
 const metrics = [
   { label: "Article views (30d)", value: "18,420", delta: "+12.4%", icon: Eye },
@@ -46,8 +40,17 @@ const metrics = [
 
 export default function AdminPage() {
   const [items, setItems] = useState(seedPosts);
+  const [bookings, setBookings] = useState<{ id: number; name: string; type: string; when: string; status: string }[]>([]);
+  const [loadingBookings, setLoadingBookings] = useState(true);
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
+
+  useEffect(() => {
+    getBookings().then((data) => {
+      setBookings(data);
+      setLoadingBookings(false);
+    });
+  }, []);
 
   const publish = async (status: "Published" | "Draft") => {
     if (!title.trim()) {
@@ -241,32 +244,50 @@ export default function AdminPage() {
 
             <TabsContent value="bookings" className="mt-6">
               <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
-                <ul className="divide-y divide-border">
-                  {bookings.map((b) => (
-                    <li key={b.name} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 py-4">
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-medium text-primary">{b.name}</p>
-                        <p className="mt-1 truncate text-xs text-muted-foreground">
-                          {b.type} · {b.when}
-                        </p>
-                      </div>
-                      <div className="flex shrink-0 items-center gap-3">
-                        <span
-                          className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                            b.status === "Confirmed"
-                              ? "bg-accent text-accent-foreground"
-                              : "bg-secondary text-muted-foreground"
-                          }`}
-                        >
-                          {b.status}
-                        </span>
-                        <Button size="sm" variant="outline" onClick={() => toast.success(`Confirmed ${b.name}`)}>
-                          Confirm
-                        </Button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                {loadingBookings ? (
+                  <div className="p-6 text-center text-sm text-muted-foreground">Loading bookings…</div>
+                ) : bookings.length === 0 ? (
+                  <div className="p-6 text-center text-sm text-muted-foreground">No bookings yet.</div>
+                ) : (
+                  <ul className="divide-y divide-border">
+                    {bookings.map((b) => (
+                      <li key={b.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 py-4">
+                        <div className="min-w-0">
+                          <p className="truncate text-sm font-medium text-primary">{b.name}</p>
+                          <p className="mt-1 truncate text-xs text-muted-foreground">
+                            {b.type} · {b.when}
+                          </p>
+                        </div>
+                        <div className="flex shrink-0 items-center gap-3">
+                          <span
+                            className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                              b.status === "Confirmed"
+                                ? "bg-accent text-accent-foreground"
+                                : "bg-secondary text-muted-foreground"
+                            }`}
+                          >
+                            {b.status}
+                          </span>
+                          {b.status !== "Confirmed" && (
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={async () => {
+                                await updateBookingStatus(b.id, "Confirmed");
+                                setBookings((prev) =>
+                                  prev.map((x) => (x.id === b.id ? { ...x, status: "Confirmed" } : x))
+                                );
+                                toast.success(`Confirmed ${b.name}`);
+                              }}
+                            >
+                              Confirm
+                            </Button>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </TabsContent>
 

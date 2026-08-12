@@ -10,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { consultationTypes, timeSlots } from "@/content/book";
+import { submitBooking } from "@/lib/bookings-actions";
+import { toast } from "sonner";
 
 const steps = ["Consultation", "Date", "Time", "Details"];
 
@@ -33,6 +35,7 @@ export default function BookPage() {
   const [phone, setPhone] = useState("");
   const [notes, setNotes] = useState("");
   const [confirmed, setConfirmed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const days = useMemo(() => nextDays(10), []);
   const selectedType = consultationTypes.find((t) => t.id === type);
@@ -258,8 +261,29 @@ export default function BookPage() {
                 Continue <ArrowRight />
               </Button>
             ) : (
-              <Button variant="hero" disabled={!canContinue} onClick={() => setConfirmed(true)}>
-                <Mail /> Submit request
+              <Button
+                variant="hero"
+                disabled={!canContinue || submitting}
+                onClick={async () => {
+                  setSubmitting(true);
+                  const formData = new FormData();
+                  formData.append("name", name);
+                  formData.append("email", email);
+                  formData.append("phone", phone);
+                  formData.append("notes", notes);
+                  formData.append("consultationType", selectedType?.name || type || "");
+                  formData.append("date", date || "");
+                  formData.append("time", time || "");
+                  const result = await submitBooking(formData);
+                  setSubmitting(false);
+                  if (result.success) {
+                    setConfirmed(true);
+                  } else {
+                    toast.error(result.error || "Something went wrong. Please try again.");
+                  }
+                }}
+              >
+                <Mail /> {submitting ? "Submitting…" : "Submit request"}
               </Button>
             )}
           </div>
