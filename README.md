@@ -25,21 +25,22 @@ Fikiri Communication Official Website.
 
 ## About
 
-StringBuilder is the official website for Fikiri Communication. This repository contains the front-end/source for the site, implemented primarily in TypeScript with CSS for styling.
+StringBuilder is the official website for Fikiri Communication. This repository contains the front-end/source for the site, implemented primarily in TypeScript with CSS for styling. The project is built with Next.js and React.
 
 ## Tech Stack
 
 - TypeScript
-- CSS
-- Node.js / npm (for JavaScript/TypeScript tooling)
-
-Note: If the repository includes Python tooling or scripts, use `uv` for managing Python dependencies per project conventions.
+- Next.js (React)
+- Tailwind CSS
+- Supabase
+- Prettier & ESLint
 
 ## Features
 
 - Clean, maintainable TypeScript codebase
-- Responsive styling with CSS
-- Build and development workflow driven by npm scripts
+- Responsive styling with Tailwind CSS
+- Server-rendered and optimized pages via Next.js
+- Supabase integration for backend services
 
 (Expand this list with concrete features implemented in your project: pages, components, APIs, integrations.)
 
@@ -49,6 +50,8 @@ Note: If the repository includes Python tooling or scripts, use `uv` for managin
 - Git
 - [Optional] Python 3.10+ if any Python tooling is used
 - [Optional] `uv` for Python dependency management if you use Python components
+
+This repository depends on Next.js v15 and React 19 (see package.json). Use a current LTS Node.js release for best results.
 
 ## Getting Started
 
@@ -89,16 +92,22 @@ Check for a `pyproject.toml`, `requirements.txt`, or `uv` config in the repo for
 
 ### Available scripts
 
-Check `package.json` for exact scripts. Common scripts you may find or want to add:
+The exact scripts are taken from this project's package.json. Use the commands below from the project root.
 
 ```bash
-npm run dev      # start development server (hot reload)
-npm run build    # build production assets
-npm start        # run the production server
-npm test         # run tests
+npm run dev      # start the Next.js development server (hot reload) — typically available at http://localhost:3000
+npm run build    # build the production application (Next.js)
+npm start        # start the production server after running `npm run build` (next start)
+npm run lint     # run Next.js/Eslint checks
+npm run format   # run Prettier to format code (prettier --write .)
 ```
 
-If these scripts don't exist, add them to `package.json` according to your build toolchain (Vite, webpack, Next.js, etc.).
+Notes:
+- `npm run dev` starts a local development server and should be your primary command while building features.
+- `npm run build` produces an optimized production build — run this before `npm start` when deploying to a Node-hosted environment.
+- Linting and formatting are provided; run them before opening pull requests to keep the codebase consistent.
+
+If you want additional scripts (tests, type-check, preview, custom start), we can add them to package.json.
 
 ## Environment Variables
 
@@ -107,7 +116,9 @@ Create a `.env` file in the project root (if applicable) and add environment-spe
 ```env
 # .env
 NODE_ENV=development
-API_BASE_URL=https://api.example.com
+NEXT_PUBLIC_API_BASE_URL=https://api.example.com
+NEXT_PUBLIC_SUPABASE_URL=https://xyz.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
 Never commit secrets or private keys to the repository. Add `.env` to `.gitignore` if it isn't already.
@@ -120,11 +131,17 @@ Build optimized production assets with:
 npm run build
 ```
 
-Then serve the built assets with your preferred static server or hosting provider (Netlify, Vercel, GitHub Pages, etc.). Include deployment instructions specific to your hosting choice.
+Then serve the built assets with your preferred hosting. For serverful deployment (where Node runs), use:
+
+```bash
+npm start
+```
+
+For static or serverless deployments, follow your provider's Next.js deployment guide (Vercel, Netlify, etc.).
 
 ## Testing
 
-Add tests and a test runner (Jest, Vitest, etc.) and expose a script in `package.json`:
+This repository does not define a test runner yet. To add tests, consider Jest or Vitest and add a `test` script in package.json:
 
 ```bash
 npm test
@@ -139,7 +156,7 @@ Contributions are welcome. Please follow these guidelines:
 1. Fork the repository and create a branch for your feature or bugfix.
 2. Open a descriptive pull request referencing the issue it resolves.
 3. Keep commits focused and well-described.
-4. Run tests and linters before submitting a PR.
+4. Run linting and formatting before submitting a PR (`npm run lint`, `npm run format`).
 
 Add a `CONTRIBUTING.md` with more detailed guidelines for code style, commit messages, review process, and branch naming if your project requires it.
 
@@ -161,6 +178,7 @@ For questions, issues, or contributions contact the repository owner: Washington
 
 If you'd like, I can:
 
-- Tailor the README to the exact tech stack (React, Next.js, Vite, etc.) if you tell me which framework/tooling the project uses.
-- Add CI/CD, testing, or deployment examples specific to a hosting provider.
-- Create a CONTRIBUTING.md and LICENSE file.
+- Add a `test` script and example test setup.
+- Create a `CONTRIBUTING.md` and `LICENSE` (MIT) file.
+- Add GitHub Actions CI that runs lint and format on PRs.
+- Insert README badges (build, license, lint) and deployment instructions for Vercel.
