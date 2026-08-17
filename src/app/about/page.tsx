@@ -1,9 +1,9 @@
-import { Award, CheckCircle2, Globe2, Linkedin, Target, ArrowRight } from "lucide-react";
+import { Award, CheckCircle2, Globe2, Target, ArrowRight } from "lucide-react";
 
 import Link from "next/link";
 import { Reveal, SectionHeading } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
-import { disciplines, industries, team, clientBrands, principles } from "@/content/about";
+import { disciplines, industries, clientBrands, principles } from "@/content/about";
 
 export const metadata = {
   title: "About Fikiri Communication",
@@ -31,7 +31,7 @@ export default function AboutPage() {
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
             <div className="overflow-hidden rounded-3xl border border-border shadow-lift">
-              <img src="/images/about-photo.jpg" alt="Fikiri Communication at work" loading="lazy" width={1200} height={1008} className="h-full w-full object-cover" />
+              <img src="/images/martin-team.jpg" alt="Martin Ngoni team" loading="lazy" width={1200} height={1008} className="h-full w-full object-cover" />
             </div>
           </Reveal>
 
@@ -214,6 +214,8 @@ export default function AboutPage() {
       </section>
 
       {/* 6. The Team */}
+      {/* Hidden temporarily — restore when team content is ready. */}
+      {/*
       <section className="bg-surface py-20">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
@@ -253,6 +255,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* 7. Closing CTA */}
       <section className="mx-auto max-w-6xl px-5 pb-4 sm:px-8">

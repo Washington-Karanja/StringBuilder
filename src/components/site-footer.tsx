@@ -13,8 +13,8 @@ export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border bg-surface">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.4fr]">
-          <div>
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.4fr] items-start">
+          <div className="self-start">
             <div className="flex items-center">
               <img src="/images/Fikiri-logo.png" alt="Fikiri Communication" className="h-32 w-auto shrink-0" />
             </div>
@@ -74,7 +74,7 @@ export function SiteFooter() {
             <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
               Recent articles
             </h3>
-            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+            <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
               {posts.slice(0, 2).map((p) => (
                 <li key={p.slug}>
                   <Link
@@ -87,7 +87,7 @@ export function SiteFooter() {
               ))}
             </ul>
             <form
-              className="mt-6 flex gap-2"
+              className="mt-4 flex gap-2"
               onSubmit={(e) => {
                 e.preventDefault();
                 toast.success("You're subscribed", {
