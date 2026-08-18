@@ -38,8 +38,12 @@ function mapSupabaseArticleToPost(article: Article): Post {
 }
 
 export async function getArticles(): Promise<Post[]> {
+  console.log("[DEBUG] isSupabaseConfigured:", isSupabaseConfigured());
+
   if (!isSupabaseConfigured()) {
-    return localPosts.filter((p) => p.status === "Published");
+    const local = localPosts.filter((p) => p.status === "Published");
+    console.log("[DEBUG] returning local fallback:", local.length);
+    return local;
   }
 
   try {
@@ -47,9 +51,10 @@ export async function getArticles(): Promise<Post[]> {
     const { data, error } = await supabase
       .from("articles")
       .select("*")
-      .eq("status", "published")
+      .eq("status", "Published")
       .order("created_at", { ascending: false });
 
+    console.log("[DEBUG] articles query:", { data, error, count: data?.length });
     if (error || !data || data.length === 0) {
       return localPosts.filter((p) => p.status === "Published");
     }
