@@ -167,7 +167,7 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Clients"
               title="Who We Work With"
-              description="We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare, including the pharmacy sector, where trust and repeat relationships matter more than almost anywhere. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across the Gulf, MEA and beyond."
+              description="We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across MEA."
             />
           </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
@@ -195,18 +195,21 @@ export default function AboutPage() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {industries.map((industry, i) => (
             <Reveal key={industry.name} delay={i * 0.06}>
-              <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-emerald/40 hover:shadow-lift">
-                <h3 className="text-lg font-semibold text-primary">{industry.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{industry.description}</p>
-                {industry.benchmarks && industry.benchmarks.length > 0 && (
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {industry.benchmarks.map((benchmark) => (
-                      <span key={benchmark} className="rounded-full bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground">
-                        {benchmark}
-                      </span>
-                    ))}
-                  </div>
-                )}
+              <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-emerald/40 hover:shadow-lift">
+                <img src={industry.image} alt={industry.name} className="aspect-16/9 w-full object-cover" />
+                <div className="p-7">
+                  <h3 className="text-lg font-semibold text-primary">{industry.name}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{industry.description}</p>
+                  {industry.benchmarks && industry.benchmarks.length > 0 && (
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {industry.benchmarks.map((benchmark) => (
+                        <span key={benchmark} className="rounded-full bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground">
+                          {benchmark}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </Reveal>
           ))}

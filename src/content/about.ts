@@ -4,6 +4,7 @@ export type Industry = {
   name: string;
   description: string;
   benchmarks?: string[];
+  image: string;
 };
 
 export const industries: Industry[] = [
@@ -12,33 +13,39 @@ export const industries: Industry[] = [
     description:
       "From single-brand retail to multi-tenant malls and coalition models, we design loyalty that drives footfall, basket size and repeat visits — and gives tenants a reason to take part.",
     benchmarks: ["Tesco Clubcard", "Carrefour"],
+    image: "/images/pexels-clickerhappy-227690 (1).jpg",
   },
   {
     name: "Hospitality & Travel",
     description:
       "Hotel programmes, airline and frequent-flyer schemes, and tourism partnerships built around status, experiential rewards and genuine emotional loyalty.",
     benchmarks: ["Marriott Bonvoy", "Flying Blue", "Emirates Skywards"],
+    image: "/images/pexels-el-gringo-photo-116752370-11540362 (1).jpg",
   },
   {
     name: "Banking & Financial Services",
     description:
       "Card-linked rewards, cashback, co-branded partnerships and tiered structures that deepen relationships and reward the behaviour that matters to the business.",
+    image: "/images/pexels-kamanda-x-29149926.jpg",
   },
   {
     name: "Telecommunications",
     description:
       "Subscriber rewards, usage-based incentives and data-driven personalisation that reduce churn in one of the most competitive retention environments there is.",
+    image: "/images/pexels-vishpix-14931695 (1).jpg",
   },
   {
     name: "E-commerce & Consumer Brands",
     description:
       "Subscription loyalty, referral programmes, membership clubs and gamification that turn one-time buyers into repeat customers and advocates.",
     benchmarks: ["Amazon Prime", "Sephora Beauty Insider"],
+    image: "/images/pexels-peter-xie-371876898-37616786.jpg",
   },
   {
     name: "Healthcare & Pharmacy",
     description:
       "Trust and repeat relationships matter deeply in healthcare and pharmacy. Loyalty strategies in this sector should strengthen meaningful customer relationships while using data, engagement and relevant rewards responsibly.",
+    image: "/images/pexels-meric-aydin-355263951-14841129 (1).jpg",
   },
 ];
 
