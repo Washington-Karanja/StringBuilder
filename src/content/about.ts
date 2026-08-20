@@ -39,7 +39,7 @@ export const industries: Industry[] = [
     description:
       "Subscription loyalty, referral programmes, membership clubs and gamification that turn one-time buyers into repeat customers and advocates.",
     benchmarks: ["Amazon Prime", "Sephora Beauty Insider"],
-    image: "/images/pexels-peter-xie-371876898-37616786.jpg",
+    image: "/images/pexels-rachel-claire-5490970 (2).jpg",
   },
   {
     name: "Healthcare & Pharmacy",
