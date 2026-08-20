@@ -25,7 +25,7 @@ function mapSupabaseArticleToPost(article: Article): Post {
     tags: article.tags || [],
     date: article.created_at?.split("T")[0] || "",
     readingTime: article.reading_time || "3 min read",
-    cover: article.image || "/images/blog-1.jpg",
+      cover: article.image || "/images/blog-post.jpg",
     status: article.status as "Published" | "Draft",
     body: article.content ? [article.content] : [],
   };

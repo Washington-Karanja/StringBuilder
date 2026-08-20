@@ -23,7 +23,7 @@ export const posts: Post[] = [
     tags: ["Loyalty", "Programme Design", "Economics"],
     date: "2026-07-18",
     readingTime: "8 min read",
-    cover: "/images/blog-1.jpg",
+    cover: "/images/blog-post.jpg",
     status: "Published",
     body: [
       "Walk into almost any boardroom in retail, banking, hospitality or telecommunications and you will find a loyalty programme. Some are genuinely effective. Most are not. The gap between the two is not budget. It is not technology. It is whether the programme was designed around customer behaviour or built around the convenience of internal stakeholders.",

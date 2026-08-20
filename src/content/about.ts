@@ -26,7 +26,7 @@ export const industries: Industry[] = [
     name: "Banking & Financial Services",
     description:
       "Card-linked rewards, cashback, co-branded partnerships and tiered structures that deepen relationships and reward the behaviour that matters to the business.",
-    image: "/images/pexels-kamanda-x-29149926.jpg",
+    image: "/images/growtika-5hp2g8Aem08-unsplash.jpg",
   },
   {
     name: "Telecommunications",
@@ -45,7 +45,7 @@ export const industries: Industry[] = [
     name: "Healthcare & Pharmacy",
     description:
       "Trust and repeat relationships matter deeply in healthcare and pharmacy. Loyalty strategies in this sector should strengthen meaningful customer relationships while using data, engagement and relevant rewards responsibly.",
-    image: "/images/pexels-meric-aydin-355263951-14841129 (1).jpg",
+    image: "/images/heathcare.jpg",
   },
 ];
 
