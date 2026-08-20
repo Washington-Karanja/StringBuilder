@@ -73,11 +73,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
 
       {/* Cover image */}
-      <div className="mt-10 overflow-hidden rounded-3xl">
+      <div className="mt-10 overflow-hidden rounded-3xl bg-secondary">
         <img
           src={post.cover}
           alt={post.title}
-          className="h-full w-full object-cover"
+          className="aspect-16/10 w-full object-cover"
         />
       </div>
 
