@@ -17,6 +17,10 @@ export type Article = {
 };
 
 function mapSupabaseArticleToPost(article: Article): Post {
+  const paragraphs = article.content
+    ? article.content.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean)
+    : [];
+
   const post: Post = {
     slug: article.slug,
     title: article.title,
@@ -25,9 +29,10 @@ function mapSupabaseArticleToPost(article: Article): Post {
     tags: article.tags || [],
     date: article.created_at?.split("T")[0] || "",
     readingTime: article.reading_time || "3 min read",
-      cover: article.image || "/images/blog-post.jpg",
+    cover: article.image || "/images/blog-post.jpg",
     status: article.status as "Published" | "Draft",
-    body: article.content ? [article.content] : [],
+    body: paragraphs.length > 0 ? paragraphs : [],
+    content: article.content || undefined,
   };
 
   if (article.content) {
