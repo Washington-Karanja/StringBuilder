@@ -35,7 +35,7 @@ export function SiteNav() {
   return (
     <header className="glass-nav sticky top-0 z-50">
       <nav className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-5 sm:px-8">
-        <Link href="/" className="flex min-w-0 items-center mr-3 mt-4" onClick={() => setOpen(false)}>
+        <Link href="/" className="flex min-w-0 items-center mr-3 mt-8" onClick={() => setOpen(false)}>
           <img src="/images/fikiri_communication_logo.png" alt="Fikiri Communication" className="h-28 w-auto shrink-0" />
         </Link>
 
