@@ -106,7 +106,7 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Fikiri Communication. All rights reserved.</p>
-          <p>Privacy · Terms · Built with care.</p>
+          <p>Privacy · Terms · Built with DNZL</p>
         </div>
       </div>
     </footer>
