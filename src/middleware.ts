@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const SITE_SUSPENDED = true;
+const SITE_SUSPENDED = false;
 
 const PUBLIC_PATHS = new Set([
   "/suspended",
