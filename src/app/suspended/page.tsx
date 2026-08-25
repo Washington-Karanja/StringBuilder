@@ -10,7 +10,7 @@ export default function SuspendedPage() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-5 text-center">
       <div className="mx-auto max-w-md">
         <Image
-          src="/images/fikiri_communication_logo.png"
+          src="/images/Fikiri-logo.png"
           alt="Fikiri Communication"
           width={320}
           height={128}
