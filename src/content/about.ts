@@ -12,7 +12,6 @@ export const industries: Industry[] = [
     name: "Retail & Shopping Centres",
     description:
       "From single-brand retail to multi-tenant malls and coalition models, we design loyalty that drives footfall, basket size and repeat visits — and gives tenants a reason to take part.",
-    benchmarks: ["Tesco Clubcard", "Carrefour"],
     image: "/images/pexels-el-gringo-photo-116752370-11540362 (1).jpg",
   },
   {
@@ -32,10 +31,10 @@ export const industries: Industry[] = [
     name: "Telecommunications",
     description:
       "Subscriber rewards, usage-based incentives and data-driven personalisation that reduce churn in one of the most competitive retention environments there is.",
-    image: "/images/pexels-vishpix-14931695 (1).jpg",
+    image: "/images/telecommunications.jpg",
   },
   {
-    name: "E-commerce & Consumer Brands",
+    name: "E-commerce",
     description:
       "Subscription loyalty, referral programmes, membership clubs and gamification that turn one-time buyers into repeat customers and advocates.",
     benchmarks: ["Amazon Prime", "Sephora Beauty Insider"],
