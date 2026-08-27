@@ -111,7 +111,7 @@ export default function AboutPage() {
                   <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">Who we work with</h3>
                 </div>
                 <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                  We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare, including the pharmacy sector, where trust and repeat relationships matter more than almost anywhere. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across the Gulf, MEA and beyond.
+                  We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare, including the pharmacy sector, where trust and repeat relationships matter more than almost anywhere. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across the Gulf, EMEA and beyond.
                 </p>
               </div>
             </Reveal>
@@ -167,7 +167,7 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Clients"
               title="Who We Work With"
-              description="We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across MEA."
+              description="We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across EMEA."
             />
           </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
