@@ -153,7 +153,7 @@ export default function BookPage() {
                           <Clock className="h-3.5 w-3.5" /> {t.duration}
                         </p>
                       </div>
-                      <span className="shrink-0 text-sm font-semibold text-emerald">{t.price}</span>
+                      <span className="shrink-0 text-sm font-semibold text-emerald">Request an Audit</span>
                     </button>
                   ))}
                 </div>

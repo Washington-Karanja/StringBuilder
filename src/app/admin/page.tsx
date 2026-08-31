@@ -337,9 +337,8 @@ export default function AdminPage() {
                   <h2 className="text-sm font-semibold text-primary">Services</h2>
                   <ul className="mt-4 divide-y divide-border text-sm">
                     {services.map((s) => (
-                      <li key={s.slug} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3">
+                      <li key={s.slug} className="grid grid-cols-[minmax(0,1fr)] items-center gap-4 py-3">
                         <span className="truncate text-primary">{s.title}</span>
-                        <span className="shrink-0 text-xs text-muted-foreground">{s.price}</span>
                       </li>
                     ))}
                   </ul>
