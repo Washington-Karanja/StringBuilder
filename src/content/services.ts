@@ -6,7 +6,6 @@ export type Service = {
   tagline: string;
   description: string;
   duration: string;
-  price: string;
   points: string[];
   icon: string;
 };
@@ -18,7 +17,6 @@ export const services: Service[] = [
     tagline: "Loyalty that changes behaviour without eroding margin",
     description: "Programme design, earn-and-burn mechanics, tiers, rewards and the economics that keep loyalty sustainable.",
     duration: "Audit or implementation engagement",
-    price: "Audit from Ksh 300,000",
     points: ["Programme design & redesign", "Earn-and-burn mechanics", "Tiering, rewards & loyalty economics"],
     icon: "Briefcase",
   },

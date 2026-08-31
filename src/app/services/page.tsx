@@ -56,13 +56,10 @@ export default function ServicesPage() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-t border-border pt-6 sm:flex sm:justify-between">
-                    <div className="min-w-0">
-                      <p className="text-base font-semibold text-primary">{service.price}</p>
-                      <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                        <Clock className="h-3.5 w-3.5" /> {service.duration}
-                      </p>
-                    </div>
+                  <div className="mt-auto flex items-center justify-between border-t border-border pt-6">
+                    <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <Clock className="h-3.5 w-3.5" /> {service.duration}
+                    </p>
                     <Button asChild variant="outline" className="shrink-0">
                       <Link href="/book">
                         Request an Audit <ArrowRight />
