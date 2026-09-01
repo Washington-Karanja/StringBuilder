@@ -169,6 +169,119 @@ export default function AboutPage() {
               description="We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across EMEA."
             />
           </Reveal>
+
+          <div className="mt-10 space-y-8">
+            {[
+              {
+                name: "Village Market",
+                tagline: "From a legacy loyalty programme to a digital customer ecosystem",
+                challenge:
+                  "Village Market wanted to transition its legacy loyalty programme into a more modern digital ecosystem that could provide a more seamless member experience and create a stronger foundation for customer engagement.",
+                role:
+                  "Fikiri supported the transition by helping shape the move from the traditional loyalty model into a digital ecosystem, with a focus on the customer proposition, programme structure and the foundations required for a more connected loyalty experience.",
+                whatWeWorkedOn: [
+                  "Digital loyalty programme transition",
+                  "Loyalty technology sourcing",
+                  "Loyalty proposition and programme structure",
+                  "Customer experience considerations",
+                  "Digital member engagement",
+                  "Foundations for a more connected customer ecosystem",
+                ],
+                outcome:
+                  "The transition created the foundation for a more digitally enabled loyalty experience, giving Village Market a platform from which to build stronger member engagement and more data-informed customer relationships.",
+                quote:
+                  "Fikiri brought a practical understanding of how loyalty needs to evolve alongside the customer experience. Their approach helped us move beyond simply digitising the programme and think about the broader ecosystem we wanted to create.",
+                quoteAuthor: "Village Market",
+              },
+              {
+                name: "Circle Rewards",
+                tagline: "Restructuring the value proposition around the customer",
+                challenge:
+                  "Circle Rewards needed to strengthen its value proposition and create a clearer understanding of its members in order to drive more meaningful engagement and personalisation.",
+                role:
+                  "Fikiri worked across the programme proposition, customer data and segmentation to create a stronger foundation for more relevant and impactful member engagement.",
+                whatWeWorkedOn: [
+                  "Value proposition review and restructuring",
+                  "Data quality improvement",
+                  "Segmentation review and refinement",
+                  "Data connectivity and insight integration",
+                ],
+                outcome:
+                  "The work established a stronger connection between proposition, data, segmentation and engagement, creating a more robust foundation for personalised customer experiences and ongoing loyalty optimisation.",
+                quote:
+                  "Fikiri helped us look at Circle Rewards as more than a loyalty programme. They challenged the proposition, strengthened our understanding of our customer data and helped us rethink how we could use segmentation and connected data to create more relevant experiences.",
+                quoteAuthor: "Circle Rewards",
+              },
+              {
+                name: "Guardian Healthcare",
+                tagline: "Turning transactional data into a customer retention strategy",
+                subTagline: "From transactional data to personalised customer engagement",
+                challenge:
+                  "Guardian Healthcare had a growing customer database but limited visibility into customer behaviour beyond individual transactions. The business needed to better understand customer value, frequency and retention in order to build more relevant engagement strategies.",
+                role:
+                  "Fikiri helped establish a customer intelligence framework that connected customer data, behavioural segmentation and engagement strategy.",
+                whatWeWorkedOn: [
+                  "Customer data assessment and structuring",
+                  "Behavioural segmentation",
+                  "Customer value and frequency analysis",
+                  "Retention and reactivation opportunities",
+                  "Personalised CRM strategy",
+                  "Customer journey and lifecycle planning",
+                ],
+                outcome:
+                  "The work provided the business with a clearer view of customer behaviour and a structured approach to moving from broad customer communications towards more targeted, lifecycle-led engagement.",
+                quote:
+                  "Fikiri helped us move beyond looking at transactions in isolation. Their approach gave us a much clearer understanding of our customers and how we could use that insight to create more relevant and purposeful engagement.",
+                quoteAuthor: "Guardian Healthcare",
+              },
+            ].map((study) => (
+              <article key={study.name} className="overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
+                <div className="border-b border-border bg-accent/15 px-5 py-4 sm:px-6">
+                  <h3 className="text-xl font-semibold text-primary">{study.name}</h3>
+                  <p className="mt-2 text-sm font-medium text-emerald">{study.tagline}</p>
+                  {study.subTagline ? (
+                    <p className="mt-1 text-sm text-muted-foreground">{study.subTagline}</p>
+                  ) : null}
+                </div>
+
+                <div className="space-y-6 px-5 py-6 sm:px-6">
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">The Challenge</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground">{study.challenge}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Fikiri&apos;s Role</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground">{study.role}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">What We Worked On</h4>
+                    <ul className="mt-3 space-y-2 text-sm text-foreground">
+                      {study.whatWeWorkedOn.map((item) => (
+                        <li key={item} className="flex items-start gap-3">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="rounded-2xl border border-border bg-accent/20 p-5">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">The Outcome</h4>
+                    <p className="mt-3 text-sm leading-relaxed text-foreground">{study.outcome}</p>
+                  </div>
+
+                  <blockquote className="border-l-2 border-emerald/60 pl-4 text-sm leading-relaxed text-primary">
+                    “{study.quote}”
+                    <footer className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                      — {study.quoteAuthor}
+                    </footer>
+                  </blockquote>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
