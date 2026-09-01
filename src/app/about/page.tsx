@@ -3,7 +3,8 @@ import { Award, CheckCircle2, Globe2, Target, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Reveal, SectionHeading } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
-import { disciplines, industries, clientBrands, principles } from "@/content/about";
+import { ClientWorkWithSection } from "@/components/client-work-with-section";
+import { disciplines, industries, principles } from "@/content/about";
 
 export const metadata = {
   title: "About Fikiri Communication",
@@ -160,33 +161,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Who We Work With (summary) */}
-      <section className="bg-surface py-20">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Clients"
-              title="Who We Work With"
-              description="We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across EMEA."
-            />
-          </Reveal>
-
-          <div className="mt-10 overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
-            <div className="client-marquee" aria-label="Client brands">
-              <div className="client-marquee-track">
-                {[...clientBrands, ...clientBrands].map((brand, index) => (
-                  <div key={`${brand.name}-${index}`} className="client-marquee-item">
-                    <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary font-display text-sm font-bold text-primary-foreground">
-                      {brand.mark}
-                    </span>
-                    <span className="font-display text-lg font-semibold text-primary">{brand.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ClientWorkWithSection />
 
       {/* 5. Industries */}
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
