@@ -160,6 +160,18 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="bg-surface py-20">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Clients"
+              title="Who We Work With"
+              description="We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across EMEA."
+            />
+          </Reveal>
+        </div>
+      </section>
+
       {/* 5. Industries */}
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
         <Reveal>
