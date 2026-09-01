@@ -6,7 +6,6 @@ import { Reveal, SectionHeading } from "@/components/reveal";
 import { PostCard } from "@/components/post-card";
 import { posts } from "@/data/content";
 import { services } from "@/content/services";
-import { testimonials } from "@/content/testimonials";
 import { stats } from "@/content/home";
 import { caseStudies } from "@/content/case-studies";
 
@@ -193,28 +192,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-        <Reveal>
-          <SectionHeading eyebrow="Testimonials" title="What clients say about working with us" description="Feedback from leaders who have partnered with Fikiri Communication on loyalty, CRM and customer data." />
-        </Reveal>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {testimonials.slice(0, 3).map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.07}>
-              <figure className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 shadow-soft">
-                <Award className="h-6 w-6 text-emerald/50" />
-                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-foreground">"{t.quote}"</blockquote>
-                <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">{t.initials}</span>
-                  <div className="min-w-0">
-                    <figcaption className="truncate text-sm font-semibold text-primary">{t.name}</figcaption>
-                    <p className="truncate text-xs text-muted-foreground">{t.role}</p>
-                  </div>
-                </div>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-5 pb-4 sm:px-8">

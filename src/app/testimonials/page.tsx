@@ -1,24 +1,7 @@
-"use client";
-
-import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
-import { useState } from "react";
-
 import { Reveal, SectionHeading } from "@/components/reveal";
-import { Button } from "@/components/ui/button";
-import { testimonials } from "@/content/testimonials";
+import { caseStudies } from "@/content/case-studies";
 
 export default function TestimonialsPage() {
-  const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const active = testimonials[index]!;
-
-  const go = (step: number) => {
-    setDirection(step);
-    setIndex((i) => (i + step + testimonials.length) % testimonials.length);
-  };
-
   return (
     <div>
       <section className="relative overflow-hidden border-b border-border">
@@ -26,105 +9,66 @@ export default function TestimonialsPage() {
         <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8">
           <Reveal>
             <SectionHeading
-              eyebrow="Testimonials"
-              title="The work, described by the people who lived it"
+              eyebrow="Case Studies"
+              title="Client work that shaped stronger customer relationships"
               align="center"
             />
           </Reveal>
         </div>
       </section>
 
-      <section className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-lift sm:p-14">
-          <Quote className="h-8 w-8 text-emerald/40" />
-          <div className="relative mt-6 min-h-52 sm:min-h-44">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.figure
-                key={active.name}
-                initial={{ opacity: 0, x: direction * 28 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction * -28 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <blockquote className="font-display text-xl leading-relaxed text-primary sm:text-2xl">
-                  "{active.quote}"
-                </blockquote>
-                <figcaption className="mt-8 flex items-center gap-4">
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-                    {active.initials}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-primary">{active.name}</p>
-                    <p className="truncate text-xs text-muted-foreground">{active.role}</p>
-                  </div>
-                  <span className="ml-auto flex shrink-0 gap-0.5">
-                    {Array.from({ length: active.rating }).map((_, j) => (
-                      <Star key={j} className="h-4 w-4 fill-emerald text-emerald" />
-                    ))}
-                  </span>
-                </figcaption>
-              </motion.figure>
-            </AnimatePresence>
-          </div>
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+        <div className="space-y-8">
+          {caseStudies.map((study, index) => (
+            <Reveal key={study.slug} delay={index * 0.06}>
+              <article className="overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
+                <div className="border-b border-border bg-accent/15 px-5 py-4 sm:px-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-emerald">{study.client}</p>
+                  <h3 className="mt-2 text-2xl font-semibold text-primary">{study.tagline}</h3>
+                  {study.subTagline ? (
+                    <p className="mt-2 text-sm font-medium text-muted-foreground">{study.subTagline}</p>
+                  ) : null}
+                </div>
 
-          <div className="mt-10 flex items-center justify-between border-t border-border pt-6">
-            <div className="flex gap-1.5">
-              {testimonials.map((t, i) => (
-                <button
-                  key={t.name}
-                  type="button"
-                  aria-label={`Show testimonial from ${t.name}`}
-                  onClick={() => {
-                    setDirection(i > index ? 1 : -1);
-                    setIndex(i);
-                  }}
-                  className={`h-1.5 rounded-full transition-all ${
-                    i === index ? "w-7 bg-emerald" : "w-2.5 bg-border hover:bg-muted-foreground/40"
-                  }`}
-                />
-              ))}
-            </div>
-            <div className="flex gap-2">
-              <Button variant="outline" size="icon" aria-label="Previous" onClick={() => go(-1)}>
-                <ChevronLeft />
-              </Button>
-              <Button variant="outline" size="icon" aria-label="Next" onClick={() => go(1)}>
-                <ChevronRight />
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-14 grid gap-5 sm:grid-cols-2">
-          {testimonials.map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.05}>
-              <figure className="h-full rounded-2xl border border-border bg-card p-6 shadow-soft">
-                <span className="flex gap-0.5">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="h-3.5 w-3.5 fill-emerald text-emerald" />
-                  ))}
-                </span>
-                <blockquote className="mt-4 text-sm leading-relaxed text-foreground">
-                  "{t.quote}"
-                </blockquote>
-                <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-4">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-secondary text-xs font-semibold text-primary">
-                    {t.initials}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-primary">{t.name}</p>
-                    <p className="truncate text-xs text-muted-foreground">{t.role}</p>
+                <div className="space-y-6 px-5 py-6 sm:px-6">
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div>
+                      <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">The Challenge</h4>
+                      <p className="mt-2 text-sm leading-relaxed text-foreground">{study.challenge}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Fikiri&apos;s Role</h4>
+                      <p className="mt-2 text-sm leading-relaxed text-foreground">{study.role}</p>
+                    </div>
                   </div>
-                </figcaption>
-              </figure>
+
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">What We Worked On</h4>
+                    <ul className="mt-3 grid gap-2 text-sm text-foreground sm:grid-cols-2">
+                      {study.whatWeWorkedOn.map((item) => (
+                        <li key={item} className="flex items-start gap-2">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="rounded-2xl border border-border bg-accent/20 p-5">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">The Outcome</h4>
+                    <p className="mt-3 text-sm leading-relaxed text-foreground">{study.outcome}</p>
+                  </div>
+
+                  <blockquote className="border-l-2 border-emerald/60 pl-4 text-sm leading-relaxed text-primary">
+                    “{study.quote}”
+                    <footer className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                      — {study.quoteAuthor}
+                    </footer>
+                  </blockquote>
+                </div>
+              </article>
             </Reveal>
           ))}
-        </div>
-
-        <div className="mt-14 text-center">
-          <Button asChild variant="hero" size="lg">
-            <Link href="/book">Book a Consultation</Link>
-          </Button>
         </div>
       </section>
     </div>
