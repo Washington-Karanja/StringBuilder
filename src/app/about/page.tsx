@@ -3,7 +3,6 @@ import { Award, CheckCircle2, Globe2, Target, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Reveal, SectionHeading } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
-import { ClientWorkWithSection } from "@/components/client-work-with-section";
 import { disciplines, industries, principles } from "@/content/about";
 
 export const metadata = {
@@ -160,8 +159,6 @@ export default function AboutPage() {
           </Reveal>
         </div>
       </section>
-
-      <ClientWorkWithSection />
 
       {/* 5. Industries */}
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
