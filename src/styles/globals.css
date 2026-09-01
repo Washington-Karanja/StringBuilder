@@ -210,3 +210,46 @@
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 20%, transparent 78%);
 }
+
+@keyframes client-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.client-marquee {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+.client-marquee-track {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  animation: client-marquee-scroll 22s linear infinite;
+}
+
+.client-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.client-marquee-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  min-width: min(26rem, 85vw);
+  border-right: 1px solid var(--border);
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+}

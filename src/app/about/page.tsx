@@ -170,15 +170,20 @@ export default function AboutPage() {
               description="We work with brands that take customer relationships seriously — across retail and shopping centres, hospitality and travel, banking, telecommunications, e-commerce, and healthcare. Our focus is the same in every one: helping brands build lasting connections and loyalty programmes their customers actually value, across EMEA."
             />
           </Reveal>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
-            {clientBrands.map((brand, index) => (
-              <Reveal key={brand.name} delay={index * 0.07}>
-                <div className="flex items-center gap-4 rounded-2xl border border-border bg-card p-6 shadow-soft">
-                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary font-display text-sm font-bold text-primary-foreground">{brand.mark}</span>
-                  <span className="font-display text-lg font-semibold text-primary">{brand.name}</span>
-                </div>
-              </Reveal>
-            ))}
+
+          <div className="mt-10 overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
+            <div className="client-marquee" aria-label="Client brands">
+              <div className="client-marquee-track">
+                {[...clientBrands, ...clientBrands].map((brand, index) => (
+                  <div key={`${brand.name}-${index}`} className="client-marquee-item">
+                    <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary font-display text-sm font-bold text-primary-foreground">
+                      {brand.mark}
+                    </span>
+                    <span className="font-display text-lg font-semibold text-primary">{brand.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

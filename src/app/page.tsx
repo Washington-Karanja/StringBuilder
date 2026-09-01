@@ -8,6 +8,7 @@ import { posts } from "@/data/content";
 import { services } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
 import { stats } from "@/content/home";
+import { caseStudies } from "@/content/case-studies";
 
 const icons = { Briefcase, Compass, TrendingUp, ShieldCheck, MessageSquare };
 
@@ -124,6 +125,68 @@ export default function Home() {
             {published.slice(0, 3).map((post, i) => (
               <Reveal key={post.slug} delay={i * 0.07}>
                 <PostCard post={post} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-surface py-20">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <Reveal>
+            <SectionHeading eyebrow="Case Studies" title="Client work that shaped stronger customer relationships" />
+          </Reveal>
+          <div className="mt-12 space-y-6">
+            {caseStudies.map((study, index) => (
+              <Reveal key={study.slug} delay={index * 0.06}>
+                <article className="overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
+                  <div className="grid gap-0 lg:grid-cols-[1.2fr_0.8fr]">
+                    <div className="p-7 sm:p-8 lg:p-10">
+                      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-emerald">{study.client}</p>
+                      <h3 className="mt-3 text-2xl font-semibold text-primary sm:text-3xl">{study.tagline}</h3>
+                      {study.subTagline ? (
+                        <p className="mt-2 text-sm font-medium text-muted-foreground">{study.subTagline}</p>
+                      ) : null}
+
+                      <div className="mt-8 grid gap-6 md:grid-cols-2">
+                        <div>
+                          <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">The challenge</h4>
+                          <p className="mt-2 text-sm leading-relaxed text-foreground">{study.challenge}</p>
+                        </div>
+                        <div>
+                          <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Fikiri's role</h4>
+                          <p className="mt-2 text-sm leading-relaxed text-foreground">{study.role}</p>
+                        </div>
+                      </div>
+
+                      <div className="mt-8">
+                        <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">What we worked on</h4>
+                        <ul className="mt-3 grid gap-2 text-sm text-foreground sm:grid-cols-2">
+                          {study.whatWeWorkedOn.map((item) => (
+                            <li key={item} className="flex items-start gap-2">
+                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col justify-between border-t border-border bg-accent/30 p-7 sm:p-8 lg:border-l lg:border-t-0 lg:p-10">
+                      <div>
+                        <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">The outcome</h4>
+                        <p className="mt-3 text-sm leading-relaxed text-foreground">{study.outcome}</p>
+                      </div>
+
+                      <blockquote className="mt-8 border-l-2 border-emerald/60 pl-4 text-sm leading-relaxed text-primary">
+                        “{study.quote}”
+                        <footer className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                          — {study.quoteAuthor}
+                        </footer>
+                      </blockquote>
+                    </div>
+                  </div>
+                </article>
               </Reveal>
             ))}
           </div>
