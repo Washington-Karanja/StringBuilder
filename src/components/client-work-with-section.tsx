@@ -21,24 +21,20 @@ export function ClientWorkWithSection() {
           </p>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
-          <div className="client-marquee" aria-label="Client brands">
-            <div className="client-marquee-track">
-              {[...clientBrands, ...clientBrands].map((brand, index) => (
-                <button
-                  key={`${brand.name}-${index}`}
-                  type="button"
-                  onClick={() => setActiveClient(brand.name)}
-                  className="client-marquee-item cursor-pointer text-left transition-colors hover:bg-accent/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
-                >
-                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary font-display text-sm font-bold text-primary-foreground">
-                    {brand.mark}
-                  </span>
-                  <span className="font-display text-lg font-semibold text-primary">{brand.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {clientBrands.map((brand, index) => (
+            <button
+              key={`${brand.name}-${index}`}
+              type="button"
+              onClick={() => setActiveClient(activeClient === brand.name ? "" : brand.name)}
+              className="flex items-center gap-4 rounded-2xl border border-border bg-card p-6 text-left shadow-soft transition-colors hover:bg-accent/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+            >
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary font-display text-sm font-bold text-primary-foreground">
+                {brand.mark}
+              </span>
+              <span className="font-display text-lg font-semibold text-primary">{brand.name}</span>
+            </button>
+          ))}
         </div>
 
         <div className="mt-8 space-y-4">
