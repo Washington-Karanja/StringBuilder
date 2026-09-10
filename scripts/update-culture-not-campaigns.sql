@@ -1,3 +1,17 @@
+DELETE FROM public.articles
+WHERE slug = 'culture-not-campaigns-why-loyalty-adoption-is-a-change-manag'
+  AND image IS NULL
+  AND COALESCE(content, '') = '';
+
+UPDATE public.articles
+SET status = 'Published'
+WHERE slug IN (
+  'loyalty-that-earns-its-keep',
+  'data-before-design',
+  'the-case-for-an-audit'
+)
+  AND status = 'published';
+
 UPDATE public.articles
 SET
   title = 'Culture, Not Campaigns: Why Loyalty Adoption Is a Change-Management Problem',
