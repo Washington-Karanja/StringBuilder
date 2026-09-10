@@ -20,11 +20,16 @@ function mapSupabaseArticleToPost(article: Article): Post {
   const paragraphs = article.content
     ? article.content.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean)
     : [];
+  const storedExcerpt = article.excerpt?.trim() || "";
+  const excerpt =
+    storedExcerpt && storedExcerpt !== article.content?.trim()
+      ? storedExcerpt
+      : paragraphs[0] || "";
 
   const post: Post = {
     slug: article.slug,
     title: article.title,
-    excerpt: article.excerpt || "",
+    excerpt,
     category: article.category,
     tags: article.tags || [],
     date: article.created_at?.split("T")[0] || "",
@@ -52,7 +57,7 @@ export async function getArticles(): Promise<Post[]> {
       .from("articles")
       .select("*")
       .eq("status", "Published")
-      .order("created_at", { ascending: false });
+      .order("updated_at", { ascending: false });
 
     if (error || !data || data.length === 0) {
       return localPosts.filter((p) => p.status === "Published");

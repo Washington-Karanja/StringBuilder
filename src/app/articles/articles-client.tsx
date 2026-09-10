@@ -75,7 +75,7 @@ export function ArticlesClient({ initialArticles }: { initialArticles: Post[] })
                 <h2 className="mt-5 text-2xl font-semibold leading-snug text-primary sm:text-3xl">
                   {featured.title}
                 </h2>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                   {featured.excerpt}
                 </p>
                 <div className="mt-7 flex items-center gap-3">
