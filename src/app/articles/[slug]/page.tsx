@@ -25,6 +25,8 @@ const articleHighlights = new Set([
   "Use incentives to start behaviour, not sustain it forever.",
 ]);
 
+const hasStructuredSections = (slug: string) => slug === "culture-not-campaigns";
+
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getArticleBySlug(slug);
@@ -102,13 +104,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <div className="mt-12 space-y-6 text-base leading-relaxed text-foreground sm:text-lg">
         {post.body.map((paragraph, index) => {
           const text = paragraph.trim();
-          const isShortHeading =
-            text.length > 0 &&
-            text.length < 80 &&
-            !/[.!?]["']?$/.test(text) &&
-            text.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).length >= text.split(/\s+/).length * 0.6;
+          const hasSections = hasStructuredSections(post.slug);
 
-          if (articleHeadings.has(text) || isShortHeading) {
+          if (hasSections && articleHeadings.has(text)) {
             return (
               <h2 key={index} className="mt-12 text-2xl font-semibold text-primary sm:text-3xl">
                 {text}
@@ -116,7 +114,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             );
           }
 
-          if (articleHighlights.has(text)) {
+          if (hasSections && articleHighlights.has(text)) {
             return (
               <h3 key={index} className="mt-8 text-xl font-semibold text-primary sm:text-2xl">
                 {text}
