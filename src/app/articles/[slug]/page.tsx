@@ -9,6 +9,22 @@ export const metadata = {
   description: "Essays on strategy, leadership and decision making.",
 };
 
+const articleHeadings = new Set([
+  "There Are Two Adoptions",
+  "Culture Is the Operative Variable",
+  "The Frontline Is Part of the Loyalty Product",
+  "Transitions Are the Hard Case",
+  "What This Changes in Practice",
+  "Technology Still Matters",
+]);
+
+const articleHighlights = new Set([
+  "Diagnose before you digitise.",
+  "Design for behaviour, not just process.",
+  "Measure internal adoption.",
+  "Use incentives to start behaviour, not sustain it forever.",
+]);
+
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getArticleBySlug(slug);
@@ -84,7 +100,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
       {/* Article content */}
       <div className="mt-12 space-y-6 text-base leading-relaxed text-foreground sm:text-lg">
-        {post.body.map((paragraph, i) => {
+        {post.body.map((paragraph, index) => {
           const text = paragraph.trim();
           const isShortHeading =
             text.length > 0 &&
@@ -92,11 +108,23 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             !/[.!?]["']?$/.test(text) &&
             text.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).length >= text.split(/\s+/).length * 0.6;
 
-          if (isShortHeading) {
-            return <h2 key={i} className="mt-12 text-2xl font-semibold text-primary sm:text-3xl">{text}</h2>;
+          if (articleHeadings.has(text) || isShortHeading) {
+            return (
+              <h2 key={index} className="mt-12 text-2xl font-semibold text-primary sm:text-3xl">
+                {text}
+              </h2>
+            );
           }
 
-          return <p key={i}>{paragraph}</p>;
+          if (articleHighlights.has(text)) {
+            return (
+              <h3 key={index} className="mt-8 text-xl font-semibold text-primary sm:text-2xl">
+                {text}
+              </h3>
+            );
+          }
+
+          return <p key={index}>{paragraph}</p>;
         })}
       </div>
 
