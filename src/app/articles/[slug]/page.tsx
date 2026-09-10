@@ -84,9 +84,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
       {/* Article content */}
       <div className="mt-12 space-y-6 text-base leading-relaxed text-foreground sm:text-lg">
-        {post.body.map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
-        ))}
+        {post.body.map((paragraph, i) => {
+          const text = paragraph.trim();
+          const isShortHeading =
+            text.length > 0 &&
+            text.length < 80 &&
+            !/[.!?]["']?$/.test(text) &&
+            text.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).length >= text.split(/\s+/).length * 0.6;
+
+          if (isShortHeading) {
+            return <h2 key={i} className="mt-12 text-2xl font-semibold text-primary sm:text-3xl">{text}</h2>;
+          }
+
+          return <p key={i}>{paragraph}</p>;
+        })}
       </div>
 
 
