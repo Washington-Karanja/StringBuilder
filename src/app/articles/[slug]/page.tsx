@@ -16,6 +16,12 @@ const articleHeadings = new Set([
   "Transitions Are the Hard Case",
   "What This Changes in Practice",
   "Technology Still Matters",
+  "Programmes Age Into Rigidity",
+  "CORE",
+  "PERIPHERAL",
+  "Timing Is A Design Variable, Not An Afterthought",
+  "The Relaunch Won'T Save You — Leadership Will",
+  "The Real Loyalty Challenge",
 ]);
 
 const articleHighlights = new Set([
@@ -23,9 +29,13 @@ const articleHighlights = new Set([
   "Design for behaviour, not just process.",
   "Measure internal adoption.",
   "Use incentives to start behaviour, not sustain it forever.",
+  "01 — Are we changing the core or just the edges?",
+  "02 — Are we operating on the customer's clock?",
+  "03 — Can the organization actually move?",
 ]);
 
-const hasStructuredSections = (slug: string) => slug === "culture-not-campaigns";
+const hasStructuredSections = (slug: string) =>
+  slug === "culture-not-campaigns" || slug === "your-loyalty-programme-isnt-underperforming";
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -105,6 +115,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         {post.body.map((paragraph, index) => {
           const text = paragraph.trim();
           const hasSections = hasStructuredSections(post.slug);
+          const isImage = /^\/images\/.+\.(jpg|jpeg|png|webp)$/i.test(text);
+
+          if (isImage) {
+            return (
+              <div key={index} className="mt-10 overflow-hidden rounded-3xl bg-secondary">
+                <img src={text} alt="" className="aspect-16/10 w-full object-cover" />
+              </div>
+            );
+          }
 
           if (hasSections && articleHeadings.has(text)) {
             return (
