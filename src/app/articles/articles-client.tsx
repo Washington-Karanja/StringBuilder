@@ -102,7 +102,8 @@ export function ArticlesClient({ initialArticles }: { initialArticles: Post[] })
                 key={c}
                 type="button"
                 onClick={() => setCategory(c)}
-                className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all ${
+                aria-pressed={category === c}
+                className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                   category === c
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border bg-background text-muted-foreground hover:border-emerald/50 hover:text-primary"

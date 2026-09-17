@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { ArrowLeft, Clock } from "lucide-react";
 
-import { getArticleBySlug } from "@/lib/articles";
+import { ArticleShare } from "@/components/article-share";
+import { PostCard } from "@/components/post-card";
+import { Button } from "@/components/ui/button";
+import { getArticleBySlug, getArticles } from "@/lib/articles";
 import { formatDate } from "@/data/content";
 
 export const metadata = {
@@ -53,6 +56,27 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     );
   }
 
+  const relatedArticles = (await getArticles())
+    .filter((article) => article.status === "Published" && article.slug !== post.slug)
+    .sort((first, second) => {
+      const firstCategoryMatch = first.category === post.category ? 1 : 0;
+      const secondCategoryMatch = second.category === post.category ? 1 : 0;
+
+      if (firstCategoryMatch !== secondCategoryMatch) {
+        return secondCategoryMatch - firstCategoryMatch;
+      }
+
+      const firstSharedTags = first.tags.filter((tag) => post.tags.includes(tag)).length;
+      const secondSharedTags = second.tags.filter((tag) => post.tags.includes(tag)).length;
+
+      if (firstSharedTags !== secondSharedTags) {
+        return secondSharedTags - firstSharedTags;
+      }
+
+      return second.date.localeCompare(first.date);
+    })
+    .slice(0, 3);
+
 
   return (
     <article className="mx-auto max-w-4xl px-5 py-14 sm:px-8">
@@ -96,6 +120,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
           {post.excerpt}
         </p>
+
+        <div className="mt-6">
+          <ArticleShare />
+        </div>
 
       </header>
 
@@ -168,6 +196,29 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
 
       </footer>
+
+      {relatedArticles.length > 0 ? (
+        <section className="mt-16 border-t border-border pt-10" aria-labelledby="more-insights-heading">
+          <h2 id="more-insights-heading" className="text-2xl font-semibold text-primary sm:text-3xl">
+            More insights
+          </h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {relatedArticles.map((article) => (
+              <PostCard key={article.slug} post={article} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section className="mt-16 rounded-3xl border border-border bg-surface p-8 sm:p-12">
+        <h2 className="text-2xl font-semibold text-primary sm:text-3xl">Book a consultation</h2>
+        <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+          Explore your loyalty, CRM or customer data challenge with Martin Ngoni.
+        </p>
+        <Button asChild variant="hero" className="mt-6">
+          <Link href="/book">Book a consultation</Link>
+        </Button>
+      </section>
 
     </article>
   );
