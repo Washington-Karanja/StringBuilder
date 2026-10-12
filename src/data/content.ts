@@ -53,7 +53,6 @@ export const posts: Post[] = [
       "The peripheral layer should be allowed to move quickly. It is where programmes can experiment, learn and create moments of relevance.",
       "The core is different. Core changes are strategic, commercially significant and inherently higher risk. They require evidence, leadership and deliberate design.",
       "The danger is when an organization spends all its energy changing the peripheral while never questioning the core. Edge-tinkering is not transformation.",
-      "/images/blog-5.1.jpg",
       "Timing Is A Design Variable, Not An Afterthought",
       "Loyalty is fundamentally about behaviour over time. Yet many programmes still treat time as a simple calendar setting.",
       "Welcome journey: Day 1. Second communication: Day 7. Reactivation: Day 90. Campaign: December.",
